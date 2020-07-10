@@ -11,6 +11,14 @@ class Card
     
     public function isValid(): bool 
     {
+        /*
+        echo "\nHas valid size => ";
+        var_dump($this->hasValidSize());
+        
+        echo "\nRespect boundaries => ";
+        var_dump($this->respectBoundaries());
+        */
+        
         return $this->hasValidSize() && $this->respectBoundaries();
     }
     
@@ -41,8 +49,11 @@ class Card
             if ($allowNull && is_null($number))
                 continue;
             
-            if ($number < $min || $number > $max)
+            if ($number < $min || $number > $max) {
+                // echo "\n\nThis condition was evaluated as TRUE and returned FALSE: ";
+                // echo "$number < $min || $number > $max\n\n";
                 return false;
+            }                
         }
         
         return true;
@@ -51,5 +62,16 @@ class Card
     public function hasFreeSpaceInTheMiddle()
     {
         return is_null($this->grid['N'][2]);
+    }
+    
+    public function getNumbersInCard()
+    {
+        return array_merge(
+            $this->grid['B'],
+            $this->grid['I'],
+            $this->grid['N'],
+            $this->grid['G'],
+            $this->grid['O']
+        );
     }
 }

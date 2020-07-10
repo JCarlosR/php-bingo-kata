@@ -8,6 +8,8 @@ class BingoCardGeneratorTest extends TestCase
     {
         $generator = new BingoCardGenerator();
         $card = $generator->generate();
+
+        var_dump($card);
         
         $this->assertTrue($card->isValid());
     }
